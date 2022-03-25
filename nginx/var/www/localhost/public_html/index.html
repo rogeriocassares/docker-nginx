@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>      
+    <meta charset="utf-8" />
+    <title>WebSocket CELESC</title>
+    <p id=wsMessage></p>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+    <style>
+        table {
+            font-family: sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 0.5px solid #525252;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .th-center {
+            text-align: center;
+        }
+
+        .td-center {
+            text-align: center;
+        }
+    </style>
+        
+    <script type="text/javascript">
+        //var wsUri = "ws://echo.websocket.org/";
+        // var wsUri = "wss://smartcampus.maua.br/node/celesc/ws";
+        var wsUri = "ws://10.33.133.136:1880/ws";
+        var output;
+        var socket;
+
+        function init() {
+            output = document.getElementById("output");
+
+            if (window.WebSocket) {
+                // WebSocket supported
+                writeToScreen("WebSocket supported");
+                testWebSocket();
+
+            } else {
+                // WebSocket not supported  
+                writeToScreen("WebSocket not supported");
+            }
+        }
+
+        function testWebSocket() {
+            socket = new WebSocket(wsUri);
+            socket.onopen = function (evt) { onOpen(evt) };
+            socket.onclose = function (evt) { onClose(evt) };
+            socket.onmessage = function (evt) { onMessage(evt) };
+            socket.onerror = function (evt) { onError(evt) };
+        }
+
+        function onOpen(evt) {
+            writeToScreen("CONNECTED");
+            doSend("WebSocket is on the air");
+        }
+
+        function onClose(evt) {
+            writeToScreen("DISCONNECTED");
+        }
+
+        function onMessage(evt) {
+            writeToScreen('<span style="color: blue;">RESPONSE: ' +                 evt.data.toString() + '</span>');
+            writeMessageToScreen(evt.data)
+            // socket.close();
+        }
+
+        function onError(evt) {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        function doSend(message) {
+            if (socket.readyState != WebSocket.OPEN)
+                return;
+
+            socket.send(message);
+            writeToScreen("SENT: " + message);
+
+        }
+
+        function writeToScreen(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            // pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        function writeMessageToScreen(message) {
+            var pre = document.getElementById("wsMessage");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+
+            var msg = JSON.parse(message);
+            // console.log(`msg: ${msg}`)
+
+            var data = {
+                deviceid: msg.deviceid,
+                wifiip: msg.wifiip,
+                cardstatus: msg.cardstatus,
+                date: msg.date,
+
+                APenergyT_e36: msg.APenergyT_e36,
+                APenergyA_e36: msg.APenergyA_e36,
+                APenergyB_e36: msg.APenergyB_e36,
+                APenergyC_e36: msg.APenergyC_e36,
+
+                ANenergyT_e36: msg.ANenergyT_e36,
+                ANenergyA_e36: msg.ANenergyA_e36,
+                ANenergyB_e36: msg.ANenergyB_e36,
+                ANenergyC_e36: msg.ANenergyC_e36,
+
+                RPenergyT_e36: msg.RPenergyT_e36,
+                RPenergyA_e36: msg.RPenergyA_e36,
+                RPenergyB_e36: msg.RPenergyB_e36,
+                RPenergyC_e36: msg.RPenergyC_e36,
+
+                RNenergyT_e36: msg.RNenergyT_e36,
+                RNenergyA_e36: msg.RNenergyA_e36,
+                RNenergyB_e36: msg.RNenergyB_e36,
+                RNenergyC_e36: msg.RNenergyC_e36,
+
+                SAenergyT_e36: msg.SAenergyT_e36,
+                SenergyA_e36: msg.SenergyA_e36,
+                SenergyB_e36: msg.SenergyB_e36,
+                SenergyC_e36: msg.SenergyC_e36,
+
+                SVenergyT_e36: msg.SVenergyT_e36,
+                Enenergy0_e36: msg.Enenergy0_e36,
+                Enenergy1_e36: msg.Enenergy1_e36,
+
+                SVmeanT_e36: msg.SVmeanT_e36,
+                SVmeanTLSB_e36: msg.SVmeanTLSB_e36,
+
+                PmeanT_e36: msg.PmeanT_e36,
+                PmeanA_e36: msg.PmeanA_e36,
+                PmeanB_e36: msg.PmeanB_e36,
+                PmeanC_e36: msg.PmeanC_e36,
+
+                QmeanT_e36: msg.QmeanT_e36,
+                QmeanA_e36: msg.QmeanA_e36,
+                QmeanB_e36: msg.QmeanB_e36,
+                QmeanC_e36: msg.QmeanC_e36,
+
+                SAmeanT_e36: msg.SAmeanT_e36,
+                SmeanA_e36: msg.SmeanA_e36,
+                SmeanB_e36: msg.SmeanB_e36,
+                SmeanC_e36: msg.SmeanC_e36,
+
+                PFmeanT_e36: msg.PFmeanT_e36,
+                PFmeanA_e36: msg.PFmeanA_e36,
+                PFmeanB_e36: msg.PFmeanB_e36,
+                PFmeanC_e36: msg.PFmeanC_e36,
+
+                PmeanTLSB_e36: msg.PmeanTLSB_e36,
+                PmeanALSB_e36: msg.PmeanALSB_e36,
+                PmeanBLSB_e36: msg.PmeanBLSB_e36,
+                PmeanCLSB_e36: msg.PmeanCLSB_e36,
+
+                QmeanTLSB_e36: msg.QmeanTLSB_e36,
+                QmeanALSB_e36: msg.QmeanALSB_e36,
+                QmeanBLSB_e36: msg.QmeanBLSB_e36,
+                QmeanCLSB_e36: msg.QmeanCLSB_e36,
+
+                SAmeanTLSB_e36: msg.SAmeanTLSB_e36,
+                SmeanALSB_e36: msg.SmeanALSB_e36,
+                SmeanBLSB_e36: msg.SmeanBLSB_e36,
+                SmeanCLSB_e36: msg.SmeanCLSB_e36,
+
+                UrmsA_e36: msg.UrmsA_e36,
+                UrmsB_e36: msg.UrmsB_e36,
+                UrmsC_e36: msg.UrmsC_e36,
+
+                IrmsN0_e36: msg.IrmsN0_e36,
+                IrmsA_e36: msg.IrmsA_e36,
+                IrmsB_e36: msg.IrmsB_e36,
+                IrmsC_e36: msg.IrmsC_e36,
+
+                APenergy_e26: msg.APenergy_e26,
+                ANenergy_e26: msg.ANenergy_e26,
+                ATenergy_e26: msg.ATenergy_e26,
+
+                RPenergy_e26: msg.RPenergy_e26,
+                RNenergy_e26: msg.RNenergy_e26,
+                RTenergy_e26: msg.RTenergy_e26,
+
+                EnStatus_e26: msg.EnStatus_e26,
+
+                SoftReset_e26: msg.SoftReset_e26,
+                SysStatus_e26: msg.SysStatus_e26,
+                FuncEn_e26: msg.FuncEn_e26,
+                Smean_e26: msg.Smean_e26,
+
+                Irms_e26: msg.Irms_e26,
+                Urms_e26: msg.Urms_e26,
+
+                AdjStart_e36: msg.AdjStart_e36,
+
+                UgainA_e36: msg.UgainA_e36,
+                IgainA_e36: msg.IgainA_e36,
+                UoffsetA_e36: msg.UoffsetA_e36,
+                IoffsetA_e36: msg.IoffsetA_e36,
+
+                UgainB_e36: msg.UgainB_e36,
+                IgainB_e36: msg.IgainB_e36,
+                UoffsetB_e36: msg.UoffsetB_e36,
+                IoffsetB_e36: msg.IoffsetB_e36,
+
+                UgainC_e36: msg.UgainC_e36,
+                IgainC_e36: msg.IgainC_e36,
+                UoffsetC_e36: msg.UoffsetC_e36,
+                IoffsetC_e36: msg.IoffsetC_e36,
+
+                IgainN_e36: msg.IgainN_e36,
+                IoffsetN_e36: msg.IoffsetN_e36,
+
+                CSThree_e36: msg.CSThree_e36,
+
+                SoftReset_e36: msg.SoftReset_e36,
+
+                SysStatus0_e36: msg.SysStatus0_e36,
+                SysStatus1_e36: msg.SysStatus1_e36,
+
+                FuncEn0_e36: msg.FuncEn0_e36,
+                FuncEn1_e36: msg.FuncEn1_e36,
+
+                ZXConfig_e36: msg.ZXConfig_e36,
+                SagTh_e36: msg.SagTh_e36,
+                PhaseLossTh_e36: msg.PhaseLossTh_e36,
+
+                INWarnTh0_e36: msg.INWarnTh0_e36,
+                INWarnTh1_e36: msg.INWarnTh1_e36,
+
+                THDNUTh_e36: msg.THDNUTh_e36,
+                THDNITh_e36: msg.THDNITh_e36,
+
+                DMACtrl_e36: msg.DMACtrl_e36,
+                LastSPIData_e36: msg.LastSPIData_e36,
+
+                AdjStart_e26: msg.AdjStart_e26,
+
+                SoftReset_e26: msg.SoftReset_e26,
+
+                SagTh_e26: msg.SagTh_e26,
+            }
+
+            document.getElementById("deviceid").innerHTML = `deviceid: ${data.deviceid}`;
+            document.getElementById("wifiip").innerHTML = `wifiip: ${data.wifiip}`;
+            document.getElementById("cardstatus").innerHTML = `cardstatus: ${data.cardstatus}`;
+            document.getElementById("date").innerHTML = `date: ${data.date}`;
+            
+            document.getElementById("APenergyT_e36").innerHTML = `APenergyT_e36: ${data.APenergyT_e36}`;
+            document.getElementById("APenergyA_e36").innerHTML = `APenergyA_e36: ${data.APenergyA_e36}`;
+            document.getElementById("APenergyB_e36").innerHTML = `APenergyB_e36: ${data.APenergyB_e36}`;
+            document.getElementById("APenergyC_e36").innerHTML = `APenergyC_e36: ${data.APenergyC_e36}`;
+
+            document.getElementById("ANenergyT_e36").innerHTML = `ANenergyT_e36: ${data.ANenergyT_e36}`;
+            document.getElementById("ANenergyA_e36").innerHTML = `ANenergyA_e36: ${data.ANenergyA_e36}`;
+            document.getElementById("ANenergyB_e36").innerHTML = `ANenergyB_e36: ${data.ANenergyB_e36}`;
+            document.getElementById("ANenergyC_e36").innerHTML = `ANenergyC_e36: ${data.ANenergyC_e36}`;
+
+            document.getElementById("RPenergyT_e36").innerHTML = `RPenergyT_e36: ${data.RPenergyT_e36}`;
+            document.getElementById("RPenergyA_e36").innerHTML = `RPenergyA_e36: ${data.RPenergyA_e36}`;
+            document.getElementById("RPenergyB_e36").innerHTML = `RPenergyB_e36: ${data.RPenergyB_e36}`;
+            document.getElementById("RPenergyC_e36").innerHTML = `RPenergyC_e36: ${data.RPenergyC_e36}`;
+
+            document.getElementById("RNenergyT_e36").innerHTML = `RNenergyT_e36: ${data.RNenergyT_e36}`;
+            document.getElementById("RNenergyA_e36").innerHTML = `RNenergyA_e36: ${data.RNenergyA_e36}`;
+            document.getElementById("RNenergyB_e36").innerHTML = `RNenergyB_e36: ${data.RNenergyB_e36}`;
+            document.getElementById("RNenergyC_e36").innerHTML = `RNenergyC_e36: ${data.RNenergyC_e36}`;
+
+            document.getElementById("SAenergyT_e36").innerHTML = `SAenergyT_e36: ${data.SAenergyT_e36}`;
+            document.getElementById("SenergyA_e36").innerHTML = `SenergyA_e36: ${data.SenergyA_e36}`;
+            document.getElementById("SenergyB_e36").innerHTML = `SenergyB_e36: ${data.SenergyB_e36}`;
+            document.getElementById("SenergyC_e36").innerHTML = `SenergyC_e36: ${data.SenergyC_e36}`;
+
+            document.getElementById("SVenergyT_e36").innerHTML = `SVenergyT_e36: ${data.SVenergyT_e36}`;
+            document.getElementById("Enenergy0_e36").innerHTML = `Enenergy0_e36: ${data.Enenergy0_e36}`;
+            document.getElementById("Enenergy1_e36").innerHTML = `Enenergy1_e36: ${data.Enenergy1_e36}`;
+            
+            document.getElementById("SVmeanT_e36").innerHTML = `SVmeanT_e36: ${data.SVmeanT_e36}`;
+            document.getElementById("SVmeanTLSB_e36").innerHTML = `SVmeanTLSB_e36: ${data.SVmeanTLSB_e36}`;
+
+            document.getElementById("PmeanT_e36").innerHTML = `PmeanT_e36: ${data.PmeanT_e36}`;
+            document.getElementById("PmeanA_e36").innerHTML = `PmeanA_e36: ${data.PmeanA_e36}`;
+            document.getElementById("PmeanB_e36").innerHTML = `PmeanB_e36: ${data.PmeanB_e36}`;
+            document.getElementById("PmeanC_e36").innerHTML = `PmeanC_e36: ${data.PmeanC_e36}`;
+
+            document.getElementById("QmeanT_e36").innerHTML = `QmeanT_e36: ${data.QmeanT_e36}`;
+            document.getElementById("QmeanA_e36").innerHTML = `QmeanA_e36: ${data.QmeanA_e36}`;
+            document.getElementById("QmeanB_e36").innerHTML = `QmeanB_e36: ${data.QmeanB_e36}`;
+            document.getElementById("QmeanC_e36").innerHTML = `QmeanC_e36: ${data.QmeanC_e36}`;
+
+            document.getElementById("SAmeanT_e36").innerHTML = `SAmeanT_e36: ${data.SAmeanT_e36}`;
+            document.getElementById("SmeanA_e36").innerHTML = `SmeanA_e36: ${data.SmeanA_e36}`;
+            document.getElementById("SmeanB_e36").innerHTML = `SmeanB_e36: ${data.SmeanB_e36}`;
+            document.getElementById("SmeanC_e36").innerHTML = `SmeanC_e36: ${data.SmeanC_e36}`;
+
+            document.getElementById("PFmeanT_e36").innerHTML = `PFmeanT_e36: ${data.PFmeanT_e36}`;
+            document.getElementById("PFmeanA_e36").innerHTML = `PFmeanA_e36: ${data.PFmeanA_e36}`;
+            document.getElementById("PFmeanB_e36").innerHTML = `PFmeanB_e36: ${data.PFmeanB_e36}`;
+            document.getElementById("PmeanCLSB_e36").innerHTML = `PmeanCLSB_e36: ${data.PmeanCLSB_e36}`;
+
+            document.getElementById("PmeanTLSB_e36").innerHTML = `PmeanTLSB_e36: ${data.PmeanTLSB_e36}`;
+            document.getElementById("PmeanALSB_e36").innerHTML = `PmeanALSB_e36: ${data.PmeanALSB_e36}`;
+            document.getElementById("PmeanBLSB_e36").innerHTML = `PmeanBLSB_e36: ${data.PmeanBLSB_e36}`;
+            document.getElementById("PmeanCLSB_e36").innerHTML = `PmeanCLSB_e36: ${data.PmeanCLSB_e36}`;
+
+            document.getElementById("QmeanTLSB_e36").innerHTML = `QmeanTLSB_e36: ${data.QmeanTLSB_e36}`;
+            document.getElementById("QmeanALSB_e36").innerHTML = `QmeanALSB_e36: ${data.QmeanALSB_e36}`;
+            document.getElementById("QmeanBLSB_e36").innerHTML = `QmeanBLSB_e36: ${data.QmeanBLSB_e36}`;
+            document.getElementById("QmeanCLSB_e36").innerHTML = `QmeanCLSB_e36: ${data.QmeanCLSB_e36}`;
+
+            document.getElementById("SAmeanTLSB_e36").innerHTML = `SAmeanTLSB_e36: ${data.SAmeanTLSB_e36}`;
+            document.getElementById("SmeanALSB_e36").innerHTML = `SmeanALSB_e36: ${data.SmeanALSB_e36}`;
+            document.getElementById("SmeanBLSB_e36").innerHTML = `SmeanBLSB_e36: ${data.SmeanBLSB_e36}`;
+            document.getElementById("SmeanCLSB_e36").innerHTML = `SmeanCLSB_e36: ${data.SmeanCLSB_e36}`;
+
+            document.getElementById("UrmsA_e36").innerHTML = `UrmsA_e36: ${data.UrmsA_e36}`;
+            document.getElementById("UrmsB_e36").innerHTML = `UrmsB_e36: ${data.UrmsB_e36}`;
+            document.getElementById("UrmsC_e36").innerHTML = `UrmsC_e36: ${data.UrmsC_e36}`;
+
+            document.getElementById("IrmsN0_e36").innerHTML = `IrmsN0_e36: ${data.IrmsN0_e36}`;
+            document.getElementById("IrmsA_e36").innerHTML = `IrmsA_e36: ${data.IrmsA_e36}`;
+            document.getElementById("IrmsB_e36").innerHTML = `IrmsB_e36: ${data.IrmsB_e36}`;
+            document.getElementById("IrmsC_e36").innerHTML = `IrmsC_e36: ${data.IrmsC_e36}`;
+
+            document.getElementById("APenergy_e26").innerHTML = `APenergy_e26: ${data.APenergy_e26}`;
+            document.getElementById("ANenergy_e26").innerHTML = `ANenergy_e26: ${data.ANenergy_e26}`;
+            document.getElementById("RTenergy_e26").innerHTML = `RTenergy_e26: ${data.RTenergy_e26}`;
+
+            document.getElementById("RPenergy_e26").innerHTML = `RPenergy_e26: ${data.RPenergy_e26}`;
+            document.getElementById("RNenergy_e26").innerHTML = `RNenergy_e26: ${data.RNenergy_e26}`;
+            document.getElementById("RTenergy_e26").innerHTML = `RTenergy_e26: ${data.RTenergy_e26}`;
+
+            document.getElementById("EnStatus_e26").innerHTML = `EnStatus_e26: ${data.EnStatus_e26}`;
+
+            document.getElementById("SoftReset_e26").innerHTML = `SoftReset_e26: ${data.SoftReset_e26}`;
+            document.getElementById("SysStatus_e26").innerHTML = `SysStatus_e26: ${data.SysStatus_e26}`;
+            document.getElementById("FuncEn_e26").innerHTML = `FuncEn_e26: ${data.FuncEn_e26}`;
+            document.getElementById("Smean_e26").innerHTML = `Smean_e26: ${data.Smean_e26}`;
+
+            document.getElementById("Irms_e26").innerHTML = `Irms_e26: ${data.Irms_e26}`;
+            document.getElementById("Urms_e26").innerHTML = `Urms_e26: ${data.Urms_e26}`;
+
+            document.getElementById("AdjStart_e36").innerHTML = `AdjStart_e36: ${data.AdjStart_e36}`;
+
+            document.getElementById("UgainA_e36").innerHTML = `UgainA_e36: ${data.UgainA_e36}`;
+            document.getElementById("IgainA_e36").innerHTML = `IgainA_e36: ${data.IgainA_e36}`;
+            document.getElementById("UoffsetA_e36").innerHTML = `UoffsetA_e36: ${data.UoffsetA_e36}`;
+            document.getElementById("IoffsetA_e36").innerHTML = `IoffsetA_e36: ${data.IoffsetA_e36}`;
+
+            document.getElementById("UgainB_e36").innerHTML = `UgainB_e36: ${data.UgainB_e36}`;
+            document.getElementById("IgainB_e36").innerHTML = `IgainB_e36: ${data.IgainB_e36}`;
+            document.getElementById("UoffsetB_e36").innerHTML = `UoffsetB_e36: ${data.UoffsetB_e36}`;
+            document.getElementById("IoffsetB_e36").innerHTML = `IoffsetB_e36: ${data.IoffsetB_e36}`;
+
+            document.getElementById("UgainC_e36").innerHTML = `UgainC_e36: ${data.UgainC_e36}`;
+            document.getElementById("IgainC_e36").innerHTML = `IgainC_e36: ${data.IgainC_e36}`;
+            document.getElementById("UoffsetC_e36").innerHTML = `UoffsetC_e36: ${data.UoffsetC_e36}`;
+            document.getElementById("IoffsetC_e36").innerHTML = `IoffsetC_e36: ${data.IoffsetC_e36}`;
+
+            document.getElementById("IgainN_e36").innerHTML = `IgainN_e36: ${data.IgainN_e36}`;
+            document.getElementById("IoffsetN_e36").innerHTML = `IoffsetN_e36: ${data.IoffsetN_e36}`;
+
+            document.getElementById("CSThree_e36").innerHTML = `CSThree_e36: ${data.CSThree_e36}`;
+
+            document.getElementById("SoftReset_e36").innerHTML = `SoftReset_e36: ${data.SoftReset_e36}`;
+
+            document.getElementById("SysStatus0_e36").innerHTML = `SysStatus0_e36: ${data.SysStatus0_e36}`;
+            document.getElementById("SysStatus1_e36").innerHTML = `SysStatus1_e36: ${data.SysStatus1_e36}`;
+            
+            document.getElementById("FuncEn0_e36").innerHTML = `FuncEn0_e36: ${data.FuncEn0_e36}`;
+            document.getElementById("FuncEn1_e36").innerHTML = `FuncEn1_e36: ${data.FuncEn1_e36}`;
+
+            document.getElementById("ZXConfig_e36").innerHTML = `ZXConfig_e36: ${data.ZXConfig_e36}`;
+            document.getElementById("SagTh_e36").innerHTML = `SagTh_e36: ${data.SagTh_e36}`;
+            document.getElementById("PhaseLossTh_e36").innerHTML = `PhaseLossTh_e36: ${data.PhaseLossTh_e36}`;
+
+            document.getElementById("INWarnTh0_e36").innerHTML = `INWarnTh0_e36: ${data.INWarnTh0_e36}`;
+            document.getElementById("INWarnTh1_e36").innerHTML = `INWarnTh1_e36: ${data.INWarnTh1_e36}`;
+
+            document.getElementById("THDNUTh_e36").innerHTML = `THDNUTh_e36: ${data.THDNUTh_e36}`;
+            document.getElementById("THDNITh_e36").innerHTML = `THDNITh_e36: ${data.THDNITh_e36}`;
+
+            document.getElementById("DMACtrl_e36").innerHTML = `DMACtrl_e36: ${data.DMACtrl_e36}`;
+            document.getElementById("LastSPIData_e36").innerHTML = `LastSPIData_e36: ${data.LastSPIData_e36}`;
+
+            document.getElementById("AdjStart_e26").innerHTML = `AdjStart_e26: ${data.AdjStart_e26}`;
+
+            document.getElementById("SoftReset_e26").innerHTML = `SoftReset_e26: ${data.SoftReset_e26}`;
+
+            document.getElementById("SagTh_e26").innerHTML = `SagTh_e26: ${data.SagTh_e26}`;
+
+            
+        }
+
+        // should probably use jQuery.ready here
+        if (window.addEventListener) {
+            // for W3C DOM
+            window.addEventListener("load", init, false);
+        } else {
+            // legacy IE
+            window.attachEvent("onload", init);
+        }
+
+    </script>
+</head>
+<body>
+    <h2>WebSocket Test</h2>
+    <div id="output"></div>
+
+    <div>
+        <table id="device-information-table">
+            <tr>
+                <th class="th-center" colspan="12">Device Information</th>
+            </tr>
+
+            <tr>
+                <td id="deviceid" colspan="3">deviceid:</td>
+                <td id="wifiip" colspan="3">wifiip:</td>
+                <td id="cardstatus" colspan="3">cardstatus:</td>
+                <td id="date" colspan="3">date:</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+
+    <div>
+        <table>
+            <tr>
+                <th id="power-quality-measure-table-atm90e36a" class="th-center" colspan="12">
+                    ------------------------ PowerQualityMeasurement [ATM90E36A] ------------------------
+                </th>
+            </tr>
+
+            <tr>
+                <td id="APenergyT_e36" colspan="3">APenergyT_e36:</td>
+                <td id="APenergyA_e36" colspan="3">APenergyA_e36:</td>
+                <td id="APenergyB_e36" colspan="3">APenergyB_e36:</td>
+                <td id="APenergyC_e36" colspan="3">APenergyC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="ANenergyT_e36" colspan="3">ANenergyT_e36:</td>
+                <td id="ANenergyA_e36" colspan="3">ANenergyA_e36:</td>
+                <td id="ANenergyB_e36" colspan="3">ANenergyB_e36:</td>
+                <td id="ANenergyC_e36" colspan="3">ANenergyC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="RPenergyT_e36" colspan="3">RPenergyT_e36:</td>
+                <td id="RPenergyA_e36" colspan="3">RPenergyA_e36:</td>
+                <td id="RPenergyB_e36" colspan="3">RPenergyB_e36:</td>
+                <td id="RPenergyC_e36" colspan="3">RPenergyC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="RNenergyT_e36" colspan="3">RNenergyT_e36:</td>
+                <td id="RNenergyA_e36" colspan="3">RNenergyA_e36:</td>
+                <td id="RNenergyB_e36" colspan="3">RNenergyB_e36:</td>
+                <td id="RNenergyC_e36" colspan="3">RNenergyC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SAenergyT_e36" colspan="3">SAenergyT_e36:</td>
+                <td id="SenergyA_e36" colspan="3">SenergyA_e36:</td>
+                <td id="SenergyB_e36" colspan="3">SenergyB_e36:</td>
+                <td id="SenergyC_e36" colspan="3">SenergyC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SVenergyT_e36" colspan="4">SVenergyT_e36:</td>
+                <td id="Enenergy0_e36" colspan="4">Enenergy0_e36:</td>
+                <td id="Enenergy1_e36" colspan="4">Enenergy1_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SVmeanT_e36" colspan="6">SVmeanT_e36:</td>
+                <td id="SVmeanTLSB_e36" colspan="6">SVmeanTLSB_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="PmeanT_e36" colspan="3">PmeanT_e36:</td>
+                <td id="PmeanA_e36" colspan="3">PmeanA_e36:</td>
+                <td id="PmeanB_e36" colspan="3">PmeanB_e36:</td>
+                <td id="PmeanC_e36" colspan="3">PmeanC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="QmeanT_e36" colspan="3">QmeanT_e36:</td>
+                <td id="QmeanA_e36" colspan="3">QmeanA_e36:</td>
+                <td id="QmeanB_e36" colspan="3">QmeanB_e36:</td>
+                <td id="QmeanC_e36" colspan="3">QmeanC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SAmeanT_e36" colspan="3">SAmeanT_e36:</td>
+                <td id="SmeanA_e36" colspan="3">SmeanA_e36:</td>
+                <td id="SmeanB_e36" colspan="3">SmeanB_e36:</td>
+                <td id="SmeanC_e36" colspan="3">SmeanC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="PFmeanT_e36" colspan="3">PFmeanT_e36:</td>
+                <td id="PFmeanA_e36" colspan="3">PFmeanA_e36:</td>
+                <td id="PFmeanB_e36" colspan="3">PFmeanB_e36:</td>
+                <td id="PFmeanC_e36" colspan="3">PFmeanC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="PmeanTLSB_e36" colspan="3">PmeanTLSB_e36:</td>
+                <td id="PmeanALSB_e36" colspan="3">PmeanALSB_e36:</td>
+                <td id="PmeanBLSB_e36" colspan="3">PmeanBLSB_e36:</td>
+                <td id="PmeanCLSB_e36" colspan="3">PmeanCLSB_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="QmeanTLSB_e36" colspan="3">QmeanTLSB_e36:</td>
+                <td id="QmeanALSB_e36" colspan="3">QmeanALSB_e36:</td>
+                <td id="QmeanBLSB_e36" colspan="3">QmeanBLSB_e36:</td>
+                <td id="QmeanCLSB_e36" colspan="3">QmeanCLSB_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SAmeanTLSB_e36" colspan="3">SAmeanTLSB_e36:</td>
+                <td id="SmeanALSB_e36" colspan="3">SmeanALSB_e36:</td>
+                <td id="SmeanBLSB_e36" colspan="3">SmeanBLSB_e36:</td>
+                <td id="SmeanCLSB_e36" colspan="3">SmeanCLSB_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="UrmsA_e36" colspan="4">UrmsA_e36:</td>
+                <td id="UrmsB_e36" colspan="4">UrmsB_e36:</td>
+                <td id="UrmsC_e36" colspan="4">UrmsC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="IrmsN0_e36" colspan="3">IrmsN0_e36:</td>
+                <td id="IrmsA_e36" colspan="3">IrmsA_e36:</td>
+                <td id="IrmsB_e36" colspan="3">IrmsB_e36:</td>
+                <td id="IrmsC_e36" colspan="3">IrmsC_e36:</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+
+    <div>
+        <table>
+            <tr>
+                <th id="power-quality-measure-table-atm90e26" class="th-center" colspan="12">
+                    ------------------------ PowerQualityMeasurement [ATM90E26] ------------------------
+                </th>
+            </tr>
+
+            <tr>
+                <td id="APenergy_e26" colspan="4">APenergy_e26:</td>
+                <td id="ANenergy_e26" colspan="4">ANenergy_e26:</td>
+                <td id="ATenergy_e26" colspan="4">ATenergy_e26:</td>
+            </tr>
+
+            <tr>
+                <td id="RPenergy_e26" colspan="4">RPenergy_e26:</td>
+                <td id="RNenergy_e26" colspan="4">RNenergy_e26:</td>
+                <td id="RTenergy_e26" colspan="4">RTenergy_e26:</td>
+            </tr>
+
+            <tr>
+                <td id="EnStatus_e26" colspan="12">EnStatus_e26:</td>
+            </tr>
+
+            <tr>
+                <td id="SoftReset_e26" colspan="3">SoftReset_e26:</td>
+                <td id="SysStatus_e26" colspan="3">SysStatus_e26:</td>
+                <td id="FuncEn_e26" colspan="3">FuncEn_e26:</td>
+                <td id="Smean_e26" colspan="3">Smean_e26:</td>
+            </tr>
+
+            <tr>
+                <td id="Irms_e26" colspan="6">Irms_e26:</td>
+                <td id="Urms_e26" colspan="6">Urms_e26:</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+
+    <div>
+        <table>
+            <tr>
+                <th id="measurement-calibration-registers-table-atm90e36a" class="th-center" colspan="12">
+                    ------------------------ MeasurementCalibrationRegisters [ATM90E36A] ------------------------
+                </th>
+            </tr>
+
+            <tr>
+                <td id="AdjStart_e36" colspan="12">AdjStart_e36: AdjStart_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="UgainA_e36" colspan="3">UgainA_e36:</td>
+                <td id="IgainA_e36" colspan="3">IgainA_e36:</td>
+                <td id="UoffsetA_e36" colspan="3">UoffsetA_e36:</td>
+                <td id="IoffsetA_e36" colspan="3">IoffsetA_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="UgainB_e36" colspan="3">UgainB_e36:</td>
+                <td id="IgainB_e36" colspan="3">IgainB_e36:</td>
+                <td id="UoffsetB_e36" colspan="3">UoffsetB_e36:</td>
+                <td id="IoffsetB_e36" colspan="3">IoffsetB_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="UgainC_e36" colspan="3">UgainC_e36:</td>
+                <td id="IgainC_e36" colspan="3">IgainC_e36:</td>
+                <td id="UoffsetC_e36" colspan="3">UoffsetC_e36:</td>
+                <td id="IoffsetC_e36" colspan="3">IoffsetC_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="IgainN_e36" colspan="6">IgainN_e36:</td>
+                <td id="IoffsetN_e36" colspan="6">IoffsetN_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="CSThree_e36" colspan="12">CSThree_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SoftReset_e36" colspan="12">SoftReset_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="SysStatus0_e36" colspan="6">SysStatus0_e36:</td>
+                <td id="SysStatus1_e36" colspan="6">SysStatus1_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="FuncEn0_e36" colspan="6">FuncEn0_e36:</td>
+                <td id="FuncEn1_e36" colspan="6">FuncEn1_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="ZXConfig_e36" colspan="4">ZXConfig_e36:</td>
+                <td id="SagTh_e36" colspan="4">SagTh_e36:</td>
+                <td id="PhaseLossTh_e36" colspan="4">PhaseLossTh_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="INWarnTh0_e36" colspan="6">INWarnTh0_e36:</td>
+                <td id="INWarnTh1_e36" colspan="6">INWarnTh1_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="THDNUTh_e36" colspan="6">THDNUTh_e36:</td>
+                <td id="THDNITh_e36" colspan="6">THDNITh_e36:</td>
+            </tr>
+
+            <tr>
+                <td id="DMACtrl_e36" colspan="6">DMACtrl_e36:</td>
+                <td id="LastSPIData_e36" colspan="6">LastSPIData_e36:</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+
+    <div>
+        <table>
+            <tr>
+                <th id="measurement-calibration-registers-table-atm90e26" class="th-center" colspan="12">
+                    ------------------------ MeasurementCalibrationRegisters [ATM90E26] ------------------------
+                </th>
+            </tr>
+
+            <tr>
+                <td id="AdjStart_e26" colspan="12">AdjStart_e26:</td>
+            </tr>
+
+            <tr>
+                <td id="SoftReset_e26" colspan="12">SoftReset_e26:</td>
+            </tr>
+
+            <tr>
+                <td id="SagTh_e26" colspan="12">SagTh_e26:</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

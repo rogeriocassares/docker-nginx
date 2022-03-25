@@ -1,0 +1,72 @@
+2022/03/24 12:22:40 [error] 20#20: *2 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.28.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2022/03/24 12:23:32 [error] 20#20: *2 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.28.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2022/03/24 12:23:39 [info] 20#20: *1 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:24:42 [error] 20#20: *3 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.28.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2022/03/24 12:25:40 [error] 20#20: *3 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.28.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2022/03/24 12:25:42 [info] 20#20: *4 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:25:55 [error] 20#20: *3 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.28.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2022/03/24 12:26:55 [info] 20#20: *5 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:28:58 [info] 20#20: *7 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:31:11 [info] 20#20: *9 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:34:18 [info] 20#20: *10 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:36:39 [info] 20#20: *12 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:42:39 [info] 20#20: *14 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:46:04 [info] 20#20: *16 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:49:26 [error] 20#20: *17 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 10.2.1.90, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "10.33.133.136", referrer: "http://10.33.133.136/"
+2022/03/24 12:50:06 [error] 20#20: *21 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 10.33.133.136, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "10.33.133.136", referrer: "http://10.33.133.136/"
+2022/03/24 12:50:26 [info] 20#20: *18 client timed out (110: Operation timed out) while waiting for request, client: 10.2.1.90, server: 0.0.0.0:80
+2022/03/24 12:50:55 [info] 20#20: *19 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:50:55 [info] 20#20: *20 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 12:51:05 [info] 20#20: *22 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 12:51:33 [info] 20#20: *23 client timed out (110: Operation timed out) while waiting for request, client: 10.2.1.90, server: 0.0.0.0:80
+2022/03/24 12:56:55 [info] 20#20: *24 client timed out (110: Operation timed out) while waiting for request, client: 10.2.1.90, server: 0.0.0.0:80
+2022/03/24 12:56:55 [info] 20#20: *25 client timed out (110: Operation timed out) while waiting for request, client: 10.2.1.90, server: 0.0.0.0:80
+2022/03/24 14:19:45 [error] 20#20: *26 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 10.33.133.23, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "10.33.133.136", referrer: "http://10.33.133.136/"
+2022/03/24 14:20:46 [info] 20#20: *27 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.23, server: 0.0.0.0:80
+2022/03/24 14:30:20 [info] 20#20: *29 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:36:53 [info] 20#20: *30 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 14:40:13 [info] 20#20: *33 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:43:42 [info] 20#20: *35 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:49:43 [info] 20#20: *37 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:51:21 [info] 20#20: *39 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:52:24 [info] 20#20: *40 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:54:42 [info] 20#20: *42 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 14:57:25 [info] 20#20: *44 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:01:29 [info] 20#20: *46 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:03:16 [info] 20#20: *48 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:04:22 [info] 20#20: *50 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:06:11 [info] 20#20: *51 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:07:50 [info] 20#20: *52 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:12:12 [info] 20#20: *54 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:13:24 [info] 20#20: *56 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 15:14:47 [info] 20#20: *57 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:27:53 [info] 20#20: *59 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:30:00 [info] 20#20: *61 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:31:08 [info] 20#20: *63 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:32:47 [info] 20#20: *65 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:33:47 [info] 20#20: *66 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:34:51 [info] 20#20: *67 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:36:32 [info] 20#20: *69 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:37:41 [info] 20#20: *70 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:38:51 [info] 20#20: *71 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:39:56 [info] 20#20: *72 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:41:39 [info] 20#20: *74 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:43:26 [info] 20#20: *75 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:44:43 [info] 20#20: *76 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:47:36 [info] 20#20: *77 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/24 16:56:05 [info] 20#20: *80 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 16:57:59 [info] 20#20: *82 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:01:22 [info] 20#20: *84 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:12:21 [info] 20#20: *86 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:13:57 [info] 20#20: *88 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:16:57 [info] 20#20: *90 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:18:35 [info] 20#20: *92 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:19:55 [info] 20#20: *94 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/24 17:37:59 [info] 20#20: *96 client timed out (110: Operation timed out) while waiting for request, client: 10.33.133.136, server: 0.0.0.0:80
+2022/03/25 09:58:34 [error] 21#21: *2 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.28.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2022/03/25 09:59:33 [info] 21#21: *1 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/25 10:06:46 [info] 22#22: *3 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/25 10:08:24 [info] 22#22: *5 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/25 10:19:03 [info] 21#21: *7 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/25 10:20:54 [info] 21#21: *9 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
+2022/03/25 10:52:43 [info] 21#21: *12 client timed out (110: Operation timed out) while waiting for request, client: 172.28.0.1, server: 0.0.0.0:80
